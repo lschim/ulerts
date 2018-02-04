@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  */
 public class EmergencyCase {
 
-    private final long id;
+    private long id;
 
     private EmergencyType emergencyType;
     private int numberPeopleHurt;
@@ -21,7 +21,9 @@ public class EmergencyCase {
     private FireState fireState;
     private MatchedSos matchedSos;
 
+    private EmergencyCase(){
 
+    }
 
     public EmergencyCase(long id) {
         this.id = id;
@@ -50,6 +52,7 @@ public class EmergencyCase {
         ARMED_ATTACK,
         HOSTAGE_SITUATION,
         WILD_ANIMAL,
+        OTHER
     }
 
     public EmergencyType getEmergencyType() {
@@ -122,5 +125,11 @@ public class EmergencyCase {
 
     public void setMatchedSos(MatchedSos matchedSos) {
         this.matchedSos = matchedSos;
+    }
+
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("EmergencyCase (id: ").append(id).append(" emergencyType: ").append(emergencyType).append(")");
+        return sb.toString();
     }
 }
