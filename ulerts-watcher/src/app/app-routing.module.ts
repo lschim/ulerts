@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
-// all other components to add
+import { AmbulanceDetailComponent } from './ambulance-detail/ambulance-detail.component';
+import { DispatcherCreateComponent } from './dispatcher-create/dispatcher-create.component';
+import { DispatcherDetailComponent } from './dispatcher-detail/dispatcher-detail.component';
+  
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full' },
