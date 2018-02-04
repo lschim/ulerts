@@ -1,6 +1,7 @@
 package com.ulerts.mayday;
 
 import android.Manifest;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -17,7 +19,10 @@ import android.widget.Toast;
  *
  */
 public class OutgoingEmergencyCallReceiver extends BroadcastReceiver {
-
+    //TODO: Hardcoded values for now
+    private static final String EMERGENCY_NUMBER = "8199891717";
+    private static final String SOS_NUMBER = "+18196900685"; //Number at which SOS SMS is sent
+    private static final String MESSAGE_TEMPLATE = "+18199441112 IS REQUESTING ASSISTANCE BY CALLING PhilouCartoux FROM POSITION %s %s";
     private static final String TAG = "OutgoingEmergencyCallReceiver";
 
     public OutgoingEmergencyCallReceiver() {
@@ -27,11 +32,17 @@ public class OutgoingEmergencyCallReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        Log.d(TAG, "Detected outgoing call");
         String number = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
-        if(number.equals("5819963350")){ //TODO: Hardcoded for now
+        Log.d(TAG, "Detected outgoing call to "+number);
+
+        if(number.equals(EMERGENCY_NUMBER)){
+
             //This is an emergency call
-            Location location = getCoord(context);
+            Location location = getLocation(context);
+            if(location != null) {
+                Log.i(TAG, location.toString());
+                sendSMS(SOS_NUMBER, String.format(MESSAGE_TEMPLATE, location.getLatitude(), location.getLongitude()));
+            }
         }
         Toast.makeText(context,
                 "test: " + number,
@@ -40,11 +51,11 @@ public class OutgoingEmergencyCallReceiver extends BroadcastReceiver {
 
 
     /**
-     * Retrieves the GPS location
+     * Retrieves the GPS location based on the latest known position, or null if no relevant position could be found
      * @param context
      * @return
      */
-    private Location getCoord(Context context) {
+    private Location getLocation(Context context) {
 
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -63,6 +74,13 @@ public class OutgoingEmergencyCallReceiver extends BroadcastReceiver {
             return location;
         }
         return null;
+    }
+
+    private void sendSMS(String phoneNumber, String message)
+    {
+        Log.i(TAG,"Sending SMS to "+phoneNumber+" : "+message);
+        SmsManager sms = SmsManager.getDefault();
+        sms.sendTextMessage(phoneNumber, null, message, null, null); //TODO: Fill the intents for errors on retry, and get cb when delivered
     }
 
 
