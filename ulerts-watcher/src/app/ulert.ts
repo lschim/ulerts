@@ -1,10 +1,17 @@
 export class Ulert {
   id: number;
-  name: string;
-  age: number;
-  sex: boolean;
+  isAmbulance: boolean;
+  isFirefighter: boolean;
+  isPolice: boolean;
+  emergencyType: string;
+  name?: string;
+  age?: number;
+  sex?: boolean;
+  victimCount?: number;
+  description?: string;
   phone: number;
-  location: { [key: number]: number; } = {};
+  location?: { [key: number]: number; } = {};
   callTime: number;
-  photo: HTMLImageElement; // may be of 'File' type
+  photo?: HTMLImageElement; // may be of 'File' type
+  active: boolean;
 }

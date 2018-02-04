@@ -1,4 +1,4 @@
-import { Component, onInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Ulert } from '../ulert';
 import { UlertService } from '../ulert.service';
 

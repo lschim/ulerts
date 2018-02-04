@@ -14,8 +14,8 @@ const routes: Routes = [
   {path: 'dispatcher:/id', component: DispatcherDetailComponent },
   {path: 'ambulance', component: AmbulanceListComponent },
   {path: 'ambulance/:id', component: AmbulanceDetailComponent },
-  {path: 'firefighter', component: FireFighterListComponent },
-  {path: 'firefighter/:id', component: FireFighterDetailComponent },
+  {path: 'firefighter', component: FirefighterListComponent },
+  {path: 'firefighter/:id', component: FirefighterDetailComponent },
   {path: 'police', component: PoliceListComponent },
   {path: 'police/:id', component: PoliceDetailComponent }
 
