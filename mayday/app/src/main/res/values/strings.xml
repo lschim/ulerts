@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Mayday</string>
+    <string name="triggerButtonText">Trigger on</string>
+    <string name="triggerDefaultNumber">819 989 1717</string>
+    <string name="sosDefaultNumber">581 996 3350</string>
+    <string name="triggerNumberText">Trigger number</string>
+    <string name="sosNumberText">Sos number</string>
+    <string name="description">When emetting a call to the trigger number, Mayday will automaticaly send a SMS to the SOS number containing the GPS location of the phone.</string>
 </resources>
