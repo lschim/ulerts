@@ -63,8 +63,8 @@
 
     <TextView
         android:id="@+id/triggerNumberText"
-        android:layout_width="114dp"
-        android:layout_height="24dp"
+        android:layout_width="135dp"
+        android:layout_height="30dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -72,14 +72,16 @@
         android:text="@string/triggerNumberText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/sosSendNumber"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498"
         tools:text="@string/triggerNumberText" />
 
     <TextView
         android:id="@+id/sosNumberText"
-        android:layout_width="114dp"
-        android:layout_height="24dp"
+        android:layout_width="135dp"
+        android:layout_height="30dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"

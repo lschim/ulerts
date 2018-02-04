@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mayday</string>
+    <string name="triggerButtonText">Déclencheur activé</string>
+    <string name="triggerDefaultNumber">819 989 1717</string>
+    <string name="sosDefaultNumber">581 996 3350</string>
+    <string name="triggerNumberText">Numéro déclencheur</string>
+    <string name="sosNumberText">Numéro Sos</string>
+    <string name="description">Lorsqu\'un appel est emis au numéro déclencheur, Mayday envoie automatiquement un SMS au numéro Sos avec les coordonées GPS du téléphone.</string>
+</resources>
