@@ -9,14 +9,14 @@
 	<packaging>jar</packaging>
 
 	<name>ulerts-registries</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Back-end server for ulerts</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.11.BUILD-SNAPSHOT</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>1.5.10.RELEASE</version>
 	</parent>
+
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
