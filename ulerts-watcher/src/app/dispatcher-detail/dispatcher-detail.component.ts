@@ -1,4 +1,4 @@
-// imports
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dispatcher-detail',
@@ -6,5 +6,7 @@
   styleUrls: ['./dispatcher-detail.component.css']
 })
 
-// export class
+export class DispatcherDetailComponent {
+  
+}
 

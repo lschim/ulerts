@@ -1,17 +1,19 @@
 export class Ulert {
-  id: number;
-  isAmbulance: boolean;
-  isFirefighter: boolean;
-  isPolice: boolean;
-  emergencyType: string;
-  name?: string;
-  age?: number;
-  sex?: boolean;
-  victimCount?: number;
-  description?: string;
-  phone: number;
-  location?: { [key: number]: number; } = {};
-  callTime: number;
-  photo?: HTMLImageElement; // may be of 'File' type
-  active: boolean;
+  constructor (
+    public id: number,
+    public isAmbulance: boolean,
+    public isFirefighter: boolean,
+    public isPolice: boolean,
+    public emergencyType: string,
+    public phone: number,
+    public callTime: Date = new Date(),
+    public location: { [key: number]: number; } = {},
+    public active: boolean = true,
+    public name?: string,
+    public age?: number,
+    public sex?: boolean,
+    public victimCount?: number,
+    public description?: string,
+    public photo?: HTMLImageElement // may be of 'File' type
+  ) { }
 }

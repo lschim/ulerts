@@ -1,4 +1,4 @@
-// imports
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-generic-list',
@@ -6,5 +6,7 @@
   styleUrls: ['./generic-list.component.css']
 })
 
-// export class
+export class GenericListComponent {
+  
+}
 
