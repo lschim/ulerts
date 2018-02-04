@@ -1,18 +1,71 @@
 package com.hackton.ulertsregistries.persistence;
 
-import com.hackton.ulertsregistries.model.EmergencyCase;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.ZoneId;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+
+import com.hackton.ulertsregistries.model.EmergencyCase;
+import com.hackton.ulertsregistries.model.EmergencyCase.EmergencyType;
+import com.hackton.ulertsregistries.model.EmergencyCase.FireState;
 
 @Repository
 public class EmergencyCaseRepository {
-    @Autowired
+   
+	@Autowired
     JdbcTemplate jdbcTemplate;
 
     public EmergencyCase findById(long id) {
         return jdbcTemplate.queryForObject("select * from emergencyCase where id=?", new Object[] { id },
                 new BeanPropertyRowMapper<EmergencyCase>(EmergencyCase.class));
     }
+    
+    public List<EmergencyCase> findAll() {
+		return jdbcTemplate.query("select * from emergencyCase", new EmergencyCaseRowMapper());
+	}
+    
+	public int deleteById(long id) {
+		return jdbcTemplate.update("delete from emergencyCase where id=?", new Object[] { id });
+	}
+
+	public int insert(EmergencyCase emergencyCase) {
+		return jdbcTemplate.update("insert into emergencyCase (id, emergencyType, numberPeopleHurt, numberCarImplied, desincarcerateNumber, ETAPolice, ETAFirefighters, ETAAmbulance, fireState, matchedSos) " 
+	+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+				new Object[] { emergencyCase.getId(), emergencyCase.getDesincarcerateNumber(), emergencyCase.getEmergencyType(), emergencyCase.getETAAmbulance(), 
+						emergencyCase.getETAFirefighters(), emergencyCase.getETAPolice(), emergencyCase.getFireState(), emergencyCase.getMatchedSos(), emergencyCase.getNumberCarImplied(),
+						emergencyCase.getNumberPeopleHurt()});
+	}
+
+	public int update(EmergencyCase emergencyCase) {
+		return jdbcTemplate.update("update emergencyCase " + 
+	" set emergencyType = ?, numberPeopleHurt = ?, numberCarImplied = ?, desincarcerateNumber = ?, ETAPolice = ?, ETAFirefighters = ?, ETAAmbulance = ?, fireState = ?, matchedSos = ? " + " where id = ?",
+				new Object[] { emergencyCase.getDesincarcerateNumber(), emergencyCase.getEmergencyType(), emergencyCase.getETAAmbulance(), 
+						emergencyCase.getETAFirefighters(), emergencyCase.getETAPolice(), emergencyCase.getFireState(), emergencyCase.getMatchedSos().getSos().getPhoneNumber(), emergencyCase.getNumberCarImplied(),
+						emergencyCase.getNumberPeopleHurt(),emergencyCase.getId()});
+	}
+	
+	 class EmergencyCaseRowMapper implements RowMapper<EmergencyCase> {
+			@Override
+			public EmergencyCase mapRow(ResultSet rs, int rowNum) throws SQLException {
+				EmergencyCase emergencyCase = new EmergencyCase();
+				emergencyCase.setId(rs.getInt("id"));
+				emergencyCase.setDesincarcerateNumber(rs.getInt("desincarcerateNumber"));
+				emergencyCase.setEmergencyType(EmergencyType.valueOf(rs.getString("emergencyType")));
+				emergencyCase.setETAAmbulance(rs.getDate("ETAAmbulance").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
+				emergencyCase.setETAFirefighters(rs.getDate("ETAFirefighters").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
+				emergencyCase.setETAPolice(rs.getDate("ETAPolice").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
+				emergencyCase.setFireState(FireState.valueOf(rs.getString("fireState")));
+				emergencyCase.setMatchedSos(null);
+				emergencyCase.setNumberCarImplied(rs.getInt("numberCarImplied"));
+				emergencyCase.setNumberPeopleHurt(rs.getInt("numberPeopleHurt"));
+				return emergencyCase;
+			}
+
+		}
 }
