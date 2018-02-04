@@ -9,7 +9,11 @@ import java.time.LocalDateTime;
  */
 public class EmergencyCase {
 
-    private long id;
+    public void setId(long id) {
+		this.id = id;
+	}
+
+	private long id;
 
     private EmergencyType emergencyType;
     private int numberPeopleHurt;
@@ -21,7 +25,7 @@ public class EmergencyCase {
     private FireState fireState;
     private MatchedSos matchedSos;
 
-    private EmergencyCase(){
+    public EmergencyCase(){
 
     }
 
