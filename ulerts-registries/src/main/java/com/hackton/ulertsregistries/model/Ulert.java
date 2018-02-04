@@ -3,7 +3,7 @@ package com.hackton.ulertsregistries.model;
 import java.time.LocalDateTime;
 import java.util.Map;
 
-public class Sos {
+public class Ulert {
 	
 	private long id;
 	private Integer phoneNumber;
@@ -11,7 +11,7 @@ public class Sos {
     private LocalDateTime time;
     private String photos;
     
-	public Sos(long id, Integer phoneNumber, Map<Double, Double> gpsCoordinates, LocalDateTime time, String photos) {
+	public Ulert(long id, Integer phoneNumber, Map<Double, Double> gpsCoordinates, LocalDateTime time, String photos) {
 		super();
 		this.id = id;
 		this.phoneNumber = phoneNumber;
