@@ -56,10 +56,10 @@ public class EmergencyCaseRepository {
 				emergencyCase.setId(rs.getInt("id"));
 				emergencyCase.setDesincarcerateNumber(rs.getInt("desincarcerateNumber"));
 				emergencyCase.setEmergencyType(EmergencyType.valueOf(rs.getString("emergencyType")));
-				emergencyCase.setETAAmbulance(rs.getDate("ETAAmbulance").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
-				emergencyCase.setETAFirefighters(rs.getDate("ETAFirefighters").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
-				emergencyCase.setETAPolice(rs.getDate("ETAPolice").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
-				emergencyCase.setFireState(FireState.valueOf(rs.getString("fireState")));
+				emergencyCase.setETAAmbulance(rs.getDate("ETAAmbulance")!= null ? rs.getDate("ETAAmbulance").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime():null);
+				emergencyCase.setETAFirefighters(rs.getDate("ETAFirefighters")!=null ? rs.getDate("ETAFirefighters").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime():null);
+				emergencyCase.setETAPolice(rs.getDate("ETAPolice")!=null ? rs.getDate("ETAPolice").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime():null);
+				emergencyCase.setFireState(rs.getString("fireState")!=null ? FireState.valueOf(rs.getString("fireState")): null);
 				emergencyCase.setMatchedSos(null);
 				emergencyCase.setNumberCarImplied(rs.getInt("numberCarImplied"));
 				emergencyCase.setNumberPeopleHurt(rs.getInt("numberPeopleHurt"));
