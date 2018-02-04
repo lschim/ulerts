@@ -17,12 +17,12 @@ public class PublicServerController {
 	
 	@RequestMapping("/getCase")
    public Sos getCase(@RequestParam(value="name", defaultValue="World") String name) {
-		  return new Sos(counter.incrementAndGet(),  String.format(template, name));
+		  return new Sos(counter.incrementAndGet(),  null, null, null, String.format(template, name));
    }
 	
 	@RequestMapping("/putCase")
    public Sos putCase(@RequestParam(value="name", defaultValue="World") String name) {
-		  return new Sos(counter.incrementAndGet(),  String.format(template, name));
+		  return null;
    }
 
 }
