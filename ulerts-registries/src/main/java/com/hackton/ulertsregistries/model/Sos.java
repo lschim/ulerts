@@ -1,7 +1,6 @@
 package com.hackton.ulertsregistries.model;
 
 import java.time.LocalDateTime;
-import java.util.Map;
 
 /**
  * Class representing an Sos : the SMS automatically sent by Mayday containing time of the call to emergency service, number

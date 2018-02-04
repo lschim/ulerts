@@ -5,7 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,10 +28,9 @@ public class LocalServerController {
 		return new ResponseEntity<>(emergencyCase, HttpStatus.OK);
 	}
 
-	@RequestMapping("/putCase")
-	@PostMapping
-	public ResponseEntity<EmergencyCase> putCase(@RequestParam(value = "emergencyCase") EmergencyCase emergencyCase) {
-		emergencyCaseRepository.update(emergencyCase);
+	@RequestMapping(value = "/putCase", method = RequestMethod.POST, consumes="application/json")
+	public ResponseEntity<EmergencyCase> putCase(@RequestBody EmergencyCase emergencyCase) {
+		emergencyCaseRepository.insert(emergencyCase);
 		return new ResponseEntity<>(emergencyCase, HttpStatus.OK);
 	}
 

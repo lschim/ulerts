@@ -1,5 +1,5 @@
 create table emergencyCase(
-   id integer not null,
+   id integer not null auto_increment,
    emergencyType varchar(255) not null,
    numberPeopleHurt integer,
    numberCarImplied integer,

@@ -35,11 +35,10 @@ public class EmergencyCaseRepository {
 	}
 
 	public int insert(EmergencyCase emergencyCase) {
-		return jdbcTemplate.update("insert into emergencyCase (id, emergencyType, numberPeopleHurt, numberCarImplied, desincarcerateNumber, ETAPolice, ETAFirefighters, ETAAmbulance, fireState, matchedSos) " 
-	+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-				new Object[] { emergencyCase.getId(), emergencyCase.getDesincarcerateNumber(), emergencyCase.getEmergencyType(), emergencyCase.getETAAmbulance(), 
-						emergencyCase.getETAFirefighters(), emergencyCase.getETAPolice(), emergencyCase.getFireState(), emergencyCase.getMatchedSos(), emergencyCase.getNumberCarImplied(),
-						emergencyCase.getNumberPeopleHurt()});
+		return jdbcTemplate.update("insert into emergencyCase (emergencyType, numberPeopleHurt, numberCarImplied, desincarcerateNumber, ETAPolice, ETAFirefighters, ETAAmbulance, fireState, matchedSos) " 
+	+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+				new Object[] { emergencyCase.getEmergencyType().toString(), emergencyCase.getNumberPeopleHurt(), emergencyCase.getNumberCarImplied(), emergencyCase.getDesincarcerateNumber(), emergencyCase.getETAPolice(), emergencyCase.getETAFirefighters(),
+						emergencyCase.getETAAmbulance(), emergencyCase.getFireState().toString(), emergencyCase.getMatchedSos()});
 	}
 
 	public int update(EmergencyCase emergencyCase) {
