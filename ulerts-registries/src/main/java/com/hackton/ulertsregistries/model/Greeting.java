@@ -1,4 +1,4 @@
-package com.hackton.ulertsregistries;
+package com.hackton.ulertsregistries.model;
 
 public class Greeting {
 
