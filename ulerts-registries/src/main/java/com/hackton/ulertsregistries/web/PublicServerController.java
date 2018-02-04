@@ -6,30 +6,55 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.hackton.ulertsregistries.service.MatchedSos;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.hackton.ulertsregistries.model.Sos;
 
-@RestController
-@RequestMapping("/publicServer")
 /**
  * Routes that manages Sos. It is the global repository that is interrogated by local centrals to match a call to an Sos
  */
+@RestController
+@RequestMapping("/publicServer")
 public class PublicServerController {
 	
-	 private final AtomicLong counter = new AtomicLong();
-	
-	@RequestMapping("/getSos")
-   public Sos getSos(@RequestParam(value="name", defaultValue="World") String name) {
-        return generateNewSos();
-   }
-	
-	@RequestMapping("/putSos")
-   public Sos putSos(@RequestParam(value="name", defaultValue="World") String name) {
-		  return generateNewSos();
-   }
+    private final AtomicLong counter = new AtomicLong();
+
+    /**
+     * Search a Sos that could be matching, and returns it with a given fiability.
+     * Returns null if no Sos is matching
+     * @param phoneNumber
+     * @param
+     * @return
+     */
+	@RequestMapping("/searchSos")
+    @GetMapping
+    public ResponseEntity<MatchedSos> searchSos(@RequestParam(value="phoneNumber") String phoneNumber,
+                                                @RequestParam(value="phoneCallDate") String phoneCallDate,
+                                                @RequestParam(value="longitude") Double latitude,
+                                                @RequestParam(value="longitude") Double longitude
+                         ) {
+        return new ResponseEntity<>(new MatchedSos(generateNewSos(), (int)(Math.random()*100+1)), HttpStatus.OK);
+    }
+
+    @RequestMapping("/getSos")
+    @GetMapping
+    public ResponseEntity<Sos> getSos(@RequestParam(value="id") String id) {
+        return new ResponseEntity<>(generateNewSos(), HttpStatus.OK);
+    }
+
+
+    @RequestMapping("/putSos")
+    @PostMapping
+    public ResponseEntity<Sos> putSos(@RequestParam(value="phoneNumber") String phoneNumber,
+                      @RequestParam(value="phoneCallDate") String phoneCallDate,
+                      @RequestParam(value="longitude") Double latitude,
+                      @RequestParam(value="longitude") Double longitude
+    ) {
+        return new ResponseEntity<>(generateNewSos(), HttpStatus.OK);
+    }
 
 
     /**
